@@ -5,6 +5,9 @@ export default defineConfig<'rspack'>({
   runtime: {
     router: true,
   },
+  dev: {
+    port: 3000,
+  },
   plugins: [
     appTools({
       bundler: 'experimental-rspack',

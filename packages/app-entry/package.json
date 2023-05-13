@@ -30,7 +30,11 @@
   "dependencies": {
     "@modern-js/runtime": "2.19.1",
     "react": "~18.2.0",
-    "react-dom": "~18.2.0"
+    "react-dom": "~18.2.0",
+    "@mui/material": "~5.13.0",
+    "@emotion/react": "~11.11.0",
+    "@emotion/styled": "~11.11.0",
+    "@fontsource/roboto": "~4.5.8"
   },
   "devDependencies": {
     "@modern-js/app-tools": "2.19.1",
