@@ -8,7 +8,7 @@ const Index = () => (
         type="image/x-icon"
         href="https://lf3-static.bytednsdoc.com/obj/eden-cn/uhbfnupenuhf/favicon.ico"
       />
-      <title>Interactive Space</title>
+      <title>Interactive Studio</title>
     </Helmet>
     <main>Hello</main>
   </>

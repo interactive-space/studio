@@ -27,7 +27,16 @@ export default function Layout() {
         />
       </Helmet>
       <CssBaseline />
-      <AppBar position="fixed" sx={{ cursor: 'default' }}>
+      <AppBar
+        position="static"
+        sx={{
+          cursor: 'default',
+          height: '48px',
+          display: 'flex',
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}
+      >
         <Container
           sx={{ display: 'flex', alignItems: 'center' }}
           maxWidth={false}
@@ -37,22 +46,14 @@ export default function Layout() {
             className="logo"
             style={{ cursor: 'pointer' }}
           >
-            Interactive Space
+            Interactive Studio
           </span>
-          <Box
-            sx={{
-              flexGrow: 1,
-              height: 48,
-              display: 'flex',
-              alignItems: 'center',
-              ml: 4,
-            }}
-          >
+          <Box sx={{ ml: '16px' }}>
             <Button onClick={() => navigateTo('/code')}>Code</Button>
           </Box>
         </Container>
       </AppBar>
-      <div style={{ marginTop: '48px' }}>
+      <div style={{ flex: 1, overflow: 'auto' }}>
         <Outlet />
       </div>
     </ThemeProvider>

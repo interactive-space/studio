@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+
+		<!-- Mobile tweaks -->
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-title" content="Code">
+		<link rel="apple-touch-icon" href="https://editor.incca.cn/1.78.2/code-192.png" />
+
+		<!-- Disable pinch zooming -->
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+
+		<!-- Workbench Icon/Manifest/CSS -->
+		<link rel="icon" href="https://editor.incca.cn/1.78.2/favicon.ico" type="image/x-icon" />
+		<link rel="manifest" href="https://editor.incca.cn/1.78.2/manifest.json">
+		<link data-name="vs/workbench/workbench.web.main" rel="stylesheet" href="https://editor.incca.cn/1.78.2/out/vs/workbench/workbench.web.main.css">
+
+	</head>
+
+	<body aria-label="">
+	</body>
+
+	<!-- Startup (do not modify order of script tags!) -->
+	<script src="https://editor.incca.cn/1.78.2/out/vs/loader.js"></script>
+	<script src="https://editor.incca.cn/1.78.2/out/vs/webPackagePaths.js"></script>
+	<script>
+		Object.keys(self.webPackagePaths).map(function (key, index) {
+			self.webPackagePaths[key] = `https://editor.incca.cn/1.78.2/packages/${key}/${self.webPackagePaths[key]}`;
+		});
+		require.config({
+			baseUrl: `https://editor.incca.cn/1.78.2/out`,
+			recordStats: true,
+			trustedTypesPolicy: window.trustedTypes?.createPolicy('amdLoader', {
+				createScriptURL(value) {
+					return value;
+				}
+			}),
+			paths: self.webPackagePaths
+		});
+	</script>
+	<script src="https://editor.incca.cn/1.78.2/out/vs/workbench/workbench.web.main.js"></script>
+
+  <script>
+    const launchWorkbench = new Promise(function (resolve, reject) {
+      define(
+        'vscode-launcher',
+        [
+          'vs/workbench/workbench.web.main',
+          'vs/platform/actions/common/actions',
+          'vs/workbench/services/layout/browser/layoutService',
+          'vs/platform/storage/common/storage',
+        ],
+        function (workbench, actions, layoutService, storage) {
+          resolve({ workbench, actions, layoutService, storage });
+        }
+      );
+    });
+
+    launchWorkbench.then(function ({ workbench }) {
+      const { create } = workbench;
+      create(
+        document.body,
+        {}
+      );
+    });
+  </script>
+</html>

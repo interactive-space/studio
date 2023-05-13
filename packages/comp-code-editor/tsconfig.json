@@ -1,0 +1,13 @@
+{
+  "extends": "@modern-js/tsconfig/base",
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["./src/*"],
+      "@interactive/code-editor": ["."]
+    },
+    "isolatedModules": true
+  },
+  "include": ["src", "stories"],
+  "exclude": ["node_modules", "dist", "modern.config.ts"]
+}
