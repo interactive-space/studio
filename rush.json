@@ -26,7 +26,7 @@
    * Specify one of: "pnpmVersion", "npmVersion", or "yarnVersion".  See the Rush documentation
    * for details about these alternatives.
    */
-  "pnpmVersion": "8.5.0",
+  "pnpmVersion": "7.32.4",
 
   // "npmVersion": "6.14.15",
   // "yarnVersion": "1.9.4",
@@ -332,6 +332,10 @@
    * 3. It's useful to have a centralized inventory of all projects and their important metadata.
    */
   "projects": [
+    {
+      "packageName": "app-entry",
+      "projectFolder": "packages/app-entry"
+    }
     // {
     //   /**
     //    * The NPM package name of the project (must match package.json)
