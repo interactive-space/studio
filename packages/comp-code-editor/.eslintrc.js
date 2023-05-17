@@ -1,3 +1,6 @@
+/**
+ * @type {import('eslint').Linter.Config}
+ */
 module.exports = {
   root: true,
   extends: ['@modern-js'],
@@ -5,5 +8,5 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json'],
   },
-  ignorePatterns: ['modern.config.ts', 'dist/', 'dist-storybook'],
+  ignorePatterns: ['dist/', 'dist-storybook/'],
 };

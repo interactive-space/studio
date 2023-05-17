@@ -1,4 +1,6 @@
-// eslint-disable-next-line import/no-commonjs
+/**
+ * @type {import('eslint').Linter.Config}
+ */
 module.exports = {
   root: true,
   extends: ['@modern-js-app'],
@@ -6,4 +8,13 @@ module.exports = {
     tsconfigRootDir: __dirname,
     project: ['./tsconfig.json'],
   },
+  ignorePatterns: ['dist/', 'node_modules/'],
+  overrides: [
+    {
+      files: ['.eslintrc.js'],
+      rules: {
+        'import/no-commonjs': 'off',
+      },
+    },
+  ],
 };

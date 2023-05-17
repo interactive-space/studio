@@ -62,7 +62,12 @@
       const { create } = workbench;
       create(
         document.body,
-        {}
+        {
+					productConfiguration: {
+						webEndpointUrlTemplate: 'https://editor.incca.cn/1.78.2',
+						webviewContentExternalBaseUrlTemplate: 'https://editor.incca.cn/1.78.2/out/vs/workbench/contrib/webview/browser/pre'
+					}
+				}
       );
     });
   </script>
