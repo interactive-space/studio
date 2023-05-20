@@ -61,6 +61,7 @@ importers:
       '@modern-js/module-tools': 2.19.1
       '@modern-js/plugin-storybook': ~2.19.1
       '@modern-js/tsconfig': 2.19.1
+      '@open-draft/deferred-promise': ~2.1.0
       '@types/jest': ~29.2.4
       '@types/node': ~16.11.7
       '@types/react': ~18.0.26
@@ -74,6 +75,8 @@ importers:
       rollup-plugin-typescript2: ~0.34.1
       tslib: ~2.5.0
       typescript: ~4.9.4
+    dependencies:
+      '@open-draft/deferred-promise': 2.1.0
     devDependencies:
       '@modern-js-app/eslint-config': 2.19.1_react@18.2.0
       '@modern-js/eslint-config': 2.19.1_react@18.2.0
@@ -6394,6 +6397,10 @@ packages:
       mkdirp: 1.0.4
       rimraf: 3.0.2
     dev: true
+
+  /@open-draft/deferred-promise/2.1.0:
+    resolution: {integrity: sha512-Rzd5JrXZX8zErHzgcGyngh4fmEbSHqTETdGj9rXtejlqMIgXFlyKBA7Jn1Xp0Ls0M0Y22+xHcWiEzbmdWl0BOA==}
+    dev: false
 
   /@pmmmwh/react-refresh-webpack-plugin/0.5.10_pvgfg2i233iclh4uhrrgev3t5a:
     resolution: {integrity: sha512-j0Ya0hCFZPd4x40qLzbhGsh9TMtdb+CJQiso+WxLOPNasohq9cc5SNUcwsZaRH6++Xh91Xkm/xHCkuIiIu0LUA==}

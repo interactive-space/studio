@@ -1,46 +1,46 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charset="utf-8" />
+  <head>
+    <meta charset="utf-8" />
 
-		<!-- Mobile tweaks -->
-		<meta name="mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-capable" content="yes" />
-		<meta name="apple-mobile-web-app-title" content="Code">
-		<link rel="apple-touch-icon" href="https://editor.incca.cn/1.78.2/code-192.png" />
+    <!-- Mobile tweaks -->
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="Code">
+    <link rel="apple-touch-icon" href="https://editor.incca.cn/1.78.2/code-192.png" />
 
-		<!-- Disable pinch zooming -->
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
+    <!-- Disable pinch zooming -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, user-scalable=no">
 
-		<!-- Workbench Icon/Manifest/CSS -->
-		<link rel="icon" href="https://editor.incca.cn/1.78.2/favicon.ico" type="image/x-icon" />
-		<link rel="manifest" href="https://editor.incca.cn/1.78.2/manifest.json">
-		<link data-name="vs/workbench/workbench.web.main" rel="stylesheet" href="https://editor.incca.cn/1.78.2/out/vs/workbench/workbench.web.main.css">
+    <!-- Workbench Icon/Manifest/CSS -->
+    <link rel="icon" href="https://editor.incca.cn/1.78.2/favicon.ico" type="image/x-icon" />
+    <link rel="manifest" href="https://editor.incca.cn/1.78.2/manifest.json">
+    <link data-name="vs/workbench/workbench.web.main" rel="stylesheet" href="https://editor.incca.cn/1.78.2/out/vs/workbench/workbench.web.main.css">
 
-	</head>
+  </head>
 
-	<body aria-label="">
-	</body>
+  <body aria-label="">
+  </body>
 
-	<!-- Startup (do not modify order of script tags!) -->
-	<script src="https://editor.incca.cn/1.78.2/out/vs/loader.js"></script>
-	<script src="https://editor.incca.cn/1.78.2/out/vs/webPackagePaths.js"></script>
-	<script>
-		Object.keys(self.webPackagePaths).map(function (key, index) {
-			self.webPackagePaths[key] = `https://editor.incca.cn/1.78.2/packages/${key}/${self.webPackagePaths[key]}`;
-		});
-		require.config({
-			baseUrl: `https://editor.incca.cn/1.78.2/out`,
-			recordStats: true,
-			trustedTypesPolicy: window.trustedTypes?.createPolicy('amdLoader', {
-				createScriptURL(value) {
-					return value;
-				}
-			}),
-			paths: self.webPackagePaths
-		});
-	</script>
-	<script src="https://editor.incca.cn/1.78.2/out/vs/workbench/workbench.web.main.js"></script>
+  <!-- Startup (do not modify order of script tags!) -->
+  <script src="https://editor.incca.cn/1.78.2/out/vs/loader.js"></script>
+  <script src="https://editor.incca.cn/1.78.2/out/vs/webPackagePaths.js"></script>
+  <script>
+    Object.keys(self.webPackagePaths).map(function (key, index) {
+      self.webPackagePaths[key] = `https://editor.incca.cn/1.78.2/packages/${key}/${self.webPackagePaths[key]}`;
+    });
+    require.config({
+      baseUrl: `https://editor.incca.cn/1.78.2/out`,
+      recordStats: true,
+      trustedTypesPolicy: window.trustedTypes?.createPolicy('amdLoader', {
+        createScriptURL(value) {
+          return value;
+        }
+      }),
+      paths: self.webPackagePaths
+    });
+  </script>
+  <script src="https://editor.incca.cn/1.78.2/out/vs/workbench/workbench.web.main.js"></script>
 
   <script>
     const launchWorkbench = new Promise(function (resolve, reject) {
@@ -58,17 +58,48 @@
       );
     });
 
-    launchWorkbench.then(function ({ workbench }) {
-      const { create } = workbench;
-      create(
-        document.body,
-        {
-					productConfiguration: {
-						webEndpointUrlTemplate: 'https://editor.incca.cn/1.78.2',
-						webviewContentExternalBaseUrlTemplate: 'https://editor.incca.cn/1.78.2/out/vs/workbench/contrib/webview/browser/pre'
-					}
-				}
-      );
-    });
+    const eventHandler = {
+      async ['internal/workbench/init'](config) {
+        const { workbench } = await launchWorkbench;
+        workbench.create(document.body, config);
+      }
+    };
+
+    /** @type {MessagePort} */
+    let messagePort;
+    /**
+     * 初始化 MessagePort
+     * @param {MessagePort} port
+     */
+    function initMessagePort(port) {
+      messagePort = port;
+      messagePort.postMessage({ type: 'internal/handshake/done' });
+      messagePort.onmessage = async (event) => {
+        const { type, payload } = event.data;
+        const { data, operationId } = payload;
+        if (eventHandler[type] instanceof Function) {
+          try {
+            const returnValue = await eventHandler[type](data);
+            messagePort.postMessage({ type: 'internal/operation/done', payload: { operationId, returnValue } });
+          } catch (error) {
+            messagePort.postMessage({ type: 'internal/operation/failed', payload: { operationId, error } });
+          }
+        } else {
+          const errorMessage = `[Inner Editor Error] Unsupport EventType: ${type}`;
+          messagePort.postMessage({ type: 'internal/operation/failed', payload: { operationId, error: new Error(errorMessage) } });
+        }
+      };
+    }
+
+    function onMessage(event) {
+      if (event.data.type === 'internal/handshake') {
+        initMessagePort(event.ports[0]);
+        window.removeEventListener('message', onMessage);
+      }
+    }
+    window.addEventListener('message', onMessage);
+
+    const receiverId = '{{receiverId}}';
+    window.parent.postMessage({ type: 'internal/ready', receiverId });
   </script>
 </html>

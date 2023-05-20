@@ -56,5 +56,8 @@
   "publishConfig": {
     "access": "public",
     "registry": "https://registry.npmjs.org/"
+  },
+  "dependencies": {
+    "@open-draft/deferred-promise": "~2.1.0"
   }
 }
