@@ -339,6 +339,10 @@
     {
       "packageName": "@interactive/code-editor",
       "projectFolder": "packages/comp-code-editor"
+    },
+    {
+      "packageName": "extension-interactive-code",
+      "projectFolder": "packages/extension-interactive-code"
     }
     // {
     //   /**
