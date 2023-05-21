@@ -7,7 +7,16 @@ const CodePage = () => (
       <title>Interactive Code</title>
     </Helmet>
     <main style={{ height: '100%' }}>
-      <Editor style={{ height: '100%' }} bordered={false} />
+      <Editor
+        style={{ height: '100%' }}
+        bordered={false}
+        extensions={[
+          {
+            name: 'interactive-studio.extension-interactive-code',
+            url: 'https://editor.incca.cn/extensions/interactive-code/1.0/',
+          },
+        ]}
+      />
     </main>
   </>
 );
