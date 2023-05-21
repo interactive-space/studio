@@ -14,6 +14,7 @@ export type { IEditorProps };
 
 export function Editor({
   theme = 'dark',
+  workspace,
   className,
   style,
   bordered = true,
@@ -42,6 +43,7 @@ export function Editor({
     messenger.send(
       InternalEvent.WorkbenchInit,
       getWorkbenchConfiguration({
+        workspace,
         additionalBuiltinExtensions: customExtensions,
         configurationDefaults: {
           ...getThemeConfiguration(theme),

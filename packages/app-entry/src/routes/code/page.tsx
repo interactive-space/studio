@@ -14,8 +14,17 @@ const CodePage = () => (
           {
             name: 'interactive-studio.extension-interactive-code',
             url: 'https://editor.incca.cn/extensions/interactive-code/1.0/',
+            usedProposedAPI: ['fileSearchProvider', 'textSearchProvider'],
           },
         ]}
+        workspace={{
+          scheme: 'memfs',
+          authority: '',
+          path: '/koa',
+          query: new URLSearchParams({
+            zip: 'https://editor.incca.cn/koa.zip',
+          }).toString(),
+        }}
       />
     </main>
   </>

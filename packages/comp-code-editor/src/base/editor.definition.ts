@@ -2,6 +2,7 @@ import type { CSSProperties } from 'react';
 
 export interface IEditorProps {
   theme?: 'dark' | 'light';
+  workspace?: UriComponents;
   bordered?: boolean;
   className?: string;
   style?: CSSProperties;
@@ -16,5 +17,13 @@ export interface IExtension {
   /**
    * 如果使用了处于提案状态的 API，通过 usedProposedAPI 进行配置
    */
-  useProposedAPI?: string[];
+  usedProposedAPI?: string[];
+}
+
+export interface UriComponents {
+  scheme: string;
+  authority: string;
+  path: string;
+  query?: string;
+  fragment?: string;
 }

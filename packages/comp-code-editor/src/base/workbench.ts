@@ -1,4 +1,4 @@
-import { IEditorProps, IExtension } from './editor.definition';
+import { IEditorProps, IExtension, UriComponents } from './editor.definition';
 
 export interface IWorkbenchConfiguration {
   productConfiguration: {
@@ -28,14 +28,6 @@ export interface IWorkbenchConfiguration {
   workspace?: UriComponents;
 }
 
-export interface UriComponents {
-  scheme: string;
-  authority: string;
-  path: string;
-  query?: string;
-  fragment?: string;
-}
-
 export function getWorkbenchConfiguration({
   productConfiguration,
   configurationDefaults,
@@ -54,7 +46,12 @@ export function getWorkbenchConfiguration({
         'https://editor.incca.cn/1.78.2/out/vs/workbench/contrib/webview/browser/pre',
       ...productConfiguration,
     },
-    configurationDefaults: { ...configurationDefaults },
+    configurationDefaults: {
+      'editor.fontSize': 14,
+      'editor.minimap.autohide': true,
+      'workbench.startupEditor': 'none',
+      ...configurationDefaults,
+    },
     additionalBuiltinExtensions: [...additionalBuiltinExtensions],
     workspace,
   };
@@ -78,9 +75,9 @@ type APIProposals =
 
 export function getEnabledApiProposals(extensions: IExtension[]): APIProposals {
   const result: APIProposals = {};
-  extensions.forEach(({ name, useProposedAPI = [] }) => {
-    if (useProposedAPI.length > 0) {
-      result[name] = useProposedAPI;
+  extensions.forEach(({ name, usedProposedAPI = [] }) => {
+    if (usedProposedAPI.length > 0) {
+      result[name] = usedProposedAPI;
     }
   });
 

@@ -1,9 +1,16 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+import { ExtensionContext } from 'vscode';
+import { MemFS } from './base/memfs';
+import { getWorkspaceContext } from './base/context';
+import { UnZip } from './base/unzip';
 
-export function activate(context: vscode.ExtensionContext) {
-  vscode.window.showInformationMessage('Hello World from extension-interactive-code!');
+export async function activate(context: ExtensionContext): Promise<void> {
+  const workspaceContext = await getWorkspaceContext();
+
+  const memfs = new MemFS(workspaceContext.rootPath);
+  context.subscriptions.push(memfs);
+
+  const unzip = new UnZip(workspaceContext.zipUrl);
+  unzip.loadFileToWorkspace(memfs);
 }
 
 export function deactivate() {}

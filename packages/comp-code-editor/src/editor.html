@@ -61,6 +61,11 @@
     const eventHandler = {
       async ['internal/workbench/init'](config) {
         const { workbench } = await launchWorkbench;
+        const { workspace } = config;
+        if (workspace) {
+          config.workspace = undefined;
+          config.workspaceProvider = { workspace: { folderUri: workbench.URI.revive(workspace) } };
+        }
         workbench.create(document.body, config);
       }
     };
