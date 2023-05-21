@@ -7,7 +7,7 @@
   "scripts": {
     "prepare": "cd ../.. && husky install",
     "start": "rimraf ./dist/ && rollup -c --watch --bundleConfigAsCjs",
-    "start:storybook": "modern dev",
+    "start:storybook": "modern dev storybook",
     "build": "rimraf ./dist/ && rollup -c --bundleConfigAsCjs",
     "reset": "rimraf ./**/node_modules",
     "lint": "modern lint",

@@ -1,7 +1,13 @@
 import React from 'react';
 import { Editor } from '@interactive/code-editor';
 
-export const Default = () => (
+export const ThemeDark = () => <Editor style={{ height: 600 }} />;
+
+export const ThemeLight = () => (
+  <Editor theme="light" style={{ height: 600 }} />
+);
+
+export const InteractiveCode = () => (
   <Editor
     style={{ height: 600 }}
     extensions={[

@@ -1,4 +1,4 @@
-import { IExtension } from './editor.definition';
+import { IEditorProps, IExtension } from './editor.definition';
 
 export interface IWorkbenchConfiguration {
   productConfiguration: {
@@ -85,4 +85,13 @@ export function getEnabledApiProposals(extensions: IExtension[]): APIProposals {
   });
 
   return result;
+}
+
+export function getThemeConfiguration(
+  theme: IEditorProps['theme'],
+): Record<string, string> {
+  return {
+    'workbench.colorTheme':
+      theme === 'light' ? 'Default Light Modern' : 'Default Dark Modern',
+  };
 }

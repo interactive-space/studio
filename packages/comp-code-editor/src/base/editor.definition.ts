@@ -1,6 +1,7 @@
 import type { CSSProperties } from 'react';
 
 export interface IEditorProps {
+  theme?: 'dark' | 'light';
   bordered?: boolean;
   className?: string;
   style?: CSSProperties;

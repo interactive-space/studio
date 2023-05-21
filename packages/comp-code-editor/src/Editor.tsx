@@ -5,6 +5,7 @@ import { Messenger } from './base/Messenger';
 import {
   convertToWorkbenchExtension,
   getEnabledApiProposals,
+  getThemeConfiguration,
   getWorkbenchConfiguration,
 } from './base/workbench';
 import iframeContent from './editor.html';
@@ -12,6 +13,7 @@ import iframeContent from './editor.html';
 export type { IEditorProps };
 
 export function Editor({
+  theme = 'dark',
   className,
   style,
   bordered = true,
@@ -41,6 +43,9 @@ export function Editor({
       InternalEvent.WorkbenchInit,
       getWorkbenchConfiguration({
         additionalBuiltinExtensions: customExtensions,
+        configurationDefaults: {
+          ...getThemeConfiguration(theme),
+        },
         productConfiguration: {
           extensionEnabledApiProposals: apiProposals,
         },
