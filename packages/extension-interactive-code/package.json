@@ -20,7 +20,25 @@
         "command": "extension-interactive-code.helloWorld",
         "title": "Hello World"
       }
-    ]
+    ],
+    "viewsContainers": {
+      "panel": [
+        {
+          "id": "interactive-code-chat",
+          "title": "Code Assistant",
+          "icon": "./resources/icon/code-chat.svg"
+        }
+      ]
+    },
+    "views": {
+      "interactive-code-chat": [
+        {
+          "id": "interactive-code-chat",
+          "type": "webview",
+          "name": "Code Assistant"
+        }
+      ]
+    }
   },
   "scripts": {
     "vscode:prepublish": "pnpm run package",
@@ -28,6 +46,7 @@
     "start": "npm-run-all --parallel start:http-server start:extension",
     "start:http-server": "http-server --cors -c-1 -p 9300",
     "start:extension": "webpack --watch",
+    "start:webview": "cd ./src/views/Webview && modern start",
     "package": "webpack --mode production --devtool hidden-source-map",
     "compile-tests": "tsc -p . --outDir out",
     "watch-tests": "tsc -p . -w --outDir out",
@@ -39,7 +58,6 @@
     "@types/vscode": "^1.78.0",
     "@types/glob": "^8.1.0",
     "@types/mocha": "^10.0.1",
-    "@types/node": "16.x",
     "@typescript-eslint/eslint-plugin": "^5.59.1",
     "@typescript-eslint/parser": "^5.59.1",
     "eslint": "^8.39.0",
@@ -50,11 +68,31 @@
     "webpack": "^5.81.0",
     "webpack-cli": "^5.0.2",
     "@vscode/test-electron": "^2.3.0",
-    "@modern-js-app/eslint-config": "~2.20.0",
     "http-server": "~14.1.1",
-    "npm-run-all": "~4.1.5"
+    "npm-run-all": "~4.1.5",
+    "@modern-js/runtime": "2.21.1",
+    "react": "18.2.0",
+    "react-dom": "18.2.0",
+    "@modern-js/app-tools": "2.21.1",
+    "@modern-js/eslint-config": "2.21.1",
+    "@modern-js/tsconfig": "2.21.1",
+    "@modern-js-app/eslint-config": "2.21.1",
+    "lint-staged": "~13.1.0",
+    "prettier": "~2.8.1",
+    "husky": "~8.0.1",
+    "rimraf": "~3.0.2",
+    "@types/jest": "~29.2.4",
+    "@types/node": "~16.11.7",
+    "@types/react": "~18.0.26",
+    "@types/react-dom": "~18.0.10",
+    "@modern-js/builder-rspack-provider": "2.21.1",
+    "tsconfig-paths-webpack-plugin": "~4.0.1",
+    "raw-loader": "~4.0.2",
+    "@types/vscode-webview": "~1.57.1"
   },
   "dependencies": {
-    "jszip": "~3.10.1"
+    "jszip": "~3.10.1",
+    "@open-draft/deferred-promise": "~2.1.0",
+    "@chatui/core": "~2.4.2"
   }
 }

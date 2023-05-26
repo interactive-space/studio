@@ -1,0 +1,5 @@
+.DS_Store
+
+resources/webview/
+dist/
+node_modules/
