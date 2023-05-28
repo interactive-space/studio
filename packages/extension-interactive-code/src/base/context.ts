@@ -1,4 +1,4 @@
-import { workspace } from 'vscode';
+import { ExtensionContext, workspace } from 'vscode';
 
 interface IWorkspaceContext {
   rootPath: string;
@@ -19,4 +19,13 @@ export async function getWorkspaceContext(): Promise<IWorkspaceContext> {
   });
 
   return workspaceContext;
+}
+
+let extensionContext: ExtensionContext;
+
+export function setExtensionContext(context: ExtensionContext) {
+  extensionContext = context;
+}
+export function getExtensionContext(): ExtensionContext {
+  return extensionContext;
 }

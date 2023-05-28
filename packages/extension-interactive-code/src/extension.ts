@@ -1,11 +1,14 @@
 import { ExtensionContext, window } from 'vscode';
-import { getWorkspaceContext } from '@/base/context';
+import { getWorkspaceContext, setExtensionContext } from '@/base/context';
 import { MemFS } from '@/base/memfs';
 import { WebviewProvider } from '@/base/Webview/Provider';
 import { initializeLayout } from '@/base/layout';
 import { UnZip } from '@/base/unzip';
+import { initializeLanguageClient } from '@/language-client';
 
 export async function activate(context: ExtensionContext): Promise<void> {
+  setExtensionContext(context);
+
   initializeLayout();
 
   const workspaceContext = await getWorkspaceContext();
@@ -22,6 +25,8 @@ export async function activate(context: ExtensionContext): Promise<void> {
       webviewOptions: { retainContextWhenHidden: true },
     }),
   );
+
+  initializeLanguageClient();
 }
 
 export function deactivate() {}

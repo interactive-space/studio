@@ -93,6 +93,9 @@
   "dependencies": {
     "jszip": "~3.10.1",
     "@open-draft/deferred-promise": "~2.1.0",
-    "@chatui/core": "~2.4.2"
+    "@chatui/core": "~2.4.2",
+    "vscode-languageclient": "~8.1.0",
+    "vscode-languageserver": "~8.1.0",
+    "vscode-languageserver-textdocument": "~1.0.8"
   }
 }
