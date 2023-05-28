@@ -43,7 +43,7 @@ export function getWorkbenchConfiguration({
       nameLong: 'CodeEditor',
       webEndpointUrlTemplate: 'https://editor.incca.cn/1.78.2',
       webviewContentExternalBaseUrlTemplate:
-        'https://editor.incca.cn/1.78.2/out/vs/workbench/contrib/webview/browser/pre',
+        'https://editor.incca.cn/1.78.2/external-template',
       ...productConfiguration,
     },
     configurationDefaults: {

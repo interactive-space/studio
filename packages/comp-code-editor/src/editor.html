@@ -27,7 +27,7 @@
   <script src="https://editor.incca.cn/1.78.2/out/vs/webPackagePaths.js"></script>
   <script>
     Object.keys(self.webPackagePaths).map(function (key, index) {
-      self.webPackagePaths[key] = `https://editor.incca.cn/1.78.2/packages/${key}/${self.webPackagePaths[key]}`;
+      self.webPackagePaths[key] = `https://editor.incca.cn/1.78.2/node_modules/${key}/${self.webPackagePaths[key]}`;
     });
     require.config({
       baseUrl: `https://editor.incca.cn/1.78.2/out`,

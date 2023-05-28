@@ -3,14 +3,25 @@ import { Helmet } from '@modern-js/runtime/head';
 const Index = () => (
   <>
     <Helmet>
-      <link
-        rel="icon"
-        type="image/x-icon"
-        href="https://lf3-static.bytednsdoc.com/obj/eden-cn/uhbfnupenuhf/favicon.ico"
-      />
-      <title>Interactive Studio</title>
+      <title>Interactive Stuido</title>
     </Helmet>
-    <main>Hello</main>
+    <main
+      style={{
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+      }}
+    >
+      <img
+        src={`${process.env.ASSET_PREFIX}/public/images/logo.png`}
+        alt="logo"
+        style={{ width: '360px', margin: '50px 0 25px' }}
+      />
+      <label style={{ fontSize: '30px', fontWeight: 'bold' }}>
+        Interactive
+      </label>
+    </main>
   </>
 );
 

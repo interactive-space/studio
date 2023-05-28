@@ -1,7 +1,7 @@
 import { Helmet } from '@modern-js/runtime/head';
 import { Outlet, useNavigate } from '@modern-js/runtime/router';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { AppBar, Box, Button, Container, CssBaseline } from '@mui/material';
+import { AppBar, Box, Button, CssBaseline } from '@mui/material';
 import './index.css';
 
 const darkTheme = createTheme({
@@ -23,7 +23,7 @@ export default function Layout() {
         <link
           rel="icon"
           type="image/x-icon"
-          href="https://lf3-static.bytednsdoc.com/obj/eden-cn/uhbfnupenuhf/favicon.ico"
+          href={`${process.env.ASSET_PREFIX}/public/images/logo-small.png`}
         />
       </Helmet>
       <CssBaseline />
@@ -37,21 +37,23 @@ export default function Layout() {
           alignItems: 'center',
         }}
       >
-        <Container
-          sx={{ display: 'flex', alignItems: 'center' }}
-          maxWidth={false}
-        >
+        <div style={{ display: 'flex', alignItems: 'center' }}>
+          <img
+            src={`${process.env.ASSET_PREFIX}/public/images/logo.png`}
+            alt="logo"
+            style={{ height: '28px', margin: '0 12px' }}
+          />
           <span
             onClick={() => navigateTo('/')}
             className="logo"
-            style={{ cursor: 'pointer' }}
+            style={{ cursor: 'pointer', fontWeight: 'bold', fontSize: '18px' }}
           >
-            Interactive Studio
+            Interactive
           </span>
           <Box sx={{ ml: '16px' }}>
             <Button onClick={() => navigateTo('/code')}>Code</Button>
           </Box>
-        </Container>
+        </div>
       </AppBar>
       <div style={{ flex: 1, overflow: 'auto' }}>
         <Outlet />
