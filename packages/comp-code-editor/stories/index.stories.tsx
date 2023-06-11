@@ -1,5 +1,5 @@
 import React from 'react';
-import { Editor } from '@interactive/code-editor';
+import { Editor } from '@interactive-space/code-space';
 
 export const ThemeDark = () => <Editor style={{ height: 600 }} />;
 

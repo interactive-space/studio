@@ -1,24 +1,14 @@
 {
-  "name": "@interactive/code-editor",
-  "version": "0.1.0",
+  "name": "@interactive-space/code-editor",
+  "version": "0.0.1",
   "jsnext:source": "./src/index.ts",
   "types": "./dist/index.d.ts",
   "main": "./dist/index.js",
   "scripts": {
-    "prepare": "cd ../.. && husky install",
     "start": "rimraf ./dist/ && rollup -c --watch --bundleConfigAsCjs",
     "start:storybook": "modern dev storybook",
     "build": "rimraf ./dist/ && rollup -c --bundleConfigAsCjs",
-    "reset": "rimraf ./**/node_modules",
-    "lint": "modern lint",
-    "change": "modern change",
-    "bump": "modern bump",
-    "pre": "modern pre",
-    "change-status": "modern change-status",
-    "gen-release-note": "modern gen-release-note",
-    "release": "modern release",
-    "new": "modern new",
-    "upgrade": "modern upgrade"
+    "reset": "rimraf ./**/node_modules"
   },
   "lint-staged": {
     "*.{ts,tsx}": [

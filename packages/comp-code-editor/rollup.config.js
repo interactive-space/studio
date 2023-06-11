@@ -16,6 +16,7 @@ const options = [
         globals: { react: 'React' },
       },
     ],
+    external: ['@open-draft/deferred-promise', 'react'],
     plugins: [
       typescript({
         tsconfig: './tsconfig.build.json',

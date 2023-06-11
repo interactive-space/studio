@@ -4,7 +4,7 @@
     "baseUrl": "./",
     "paths": {
       "@/*": ["./src/*"],
-      "@interactive/code-editor": ["."]
+      "@interactive-space/code-editor": ["."]
     },
     "isolatedModules": true
   },

@@ -42,7 +42,7 @@
    * LTS schedule: https://nodejs.org/en/about/releases/
    * LTS versions: https://nodejs.org/en/download/releases/
    */
-  "nodeSupportedVersionRange": ">=14.15.0 <15.0.0 || >=16.13.0 <17.0.0 || >=18.15.0 <19.0.0",
+  "nodeSupportedVersionRange": ">=18.16.0 <19.0.0",
 
   /**
    * If the version check above fails, Rush will display a message showing the current
@@ -333,16 +333,23 @@
    */
   "projects": [
     {
-      "packageName": "app-entry",
-      "projectFolder": "packages/app-entry"
+      "packageName": "studio",
+      "projectFolder": "packages/app-entry",
+      "shouldPublish": true
     },
     {
-      "packageName": "@interactive/code-editor",
-      "projectFolder": "packages/comp-code-editor"
+      "packageName": "@interactive-space/code-editor",
+      "projectFolder": "packages/comp-code-editor",
+      "shouldPublish": true
     },
     {
       "packageName": "extension-interactive-code",
       "projectFolder": "packages/extension-interactive-code"
+    },
+    {
+      "packageName": "ci",
+      "projectFolder": "tools/ci",
+      "shouldPublish": false
     }
     // {
     //   /**
