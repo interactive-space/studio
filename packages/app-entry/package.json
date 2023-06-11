@@ -1,6 +1,6 @@
 {
-  "name": "app-entry",
-  "version": "0.1.0",
+  "name": "studio",
+  "version": "0.0.1",
   "scripts": {
     "reset": "npx rimraf ./**/node_modules",
     "dev": "modern dev",
@@ -35,7 +35,7 @@
     "@emotion/react": "~11.11.0",
     "@emotion/styled": "~11.11.0",
     "@fontsource/roboto": "~4.5.8",
-    "@interactive/code-editor": "workspace:*"
+    "@interactive-space/code-editor": "workspace:*"
   },
   "devDependencies": {
     "@modern-js/app-tools": "2.19.1",

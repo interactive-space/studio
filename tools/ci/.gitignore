@@ -1,0 +1,7 @@
+# OS X temporary files
+.DS_Store
+
+temp/
+dist/
+
+temp-*

@@ -1,0 +1,87 @@
+name: Release Packages
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  collect_changes:
+    runs-on: ubuntu-latest
+    outputs:
+      changes_count: ${{ steps.collect_changes.outputs.changes_count }}
+      release: ${{ steps.apply_changes.outputs.release }}
+      commit_id: ${{ steps.commit_changes.outputs.commit_id }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.16.0'
+
+      - name: Install Rush.js
+        run: npm install -g @microsoft/rush
+
+      - name: Install CI
+        run: rush install --to ci
+
+      - name: Collect Changes
+        id: collect_changes
+        run: |
+          cd tools/ci
+          rushx ci:collect-changes
+          echo "changes=$(cat ./scripts/temp-changes.json)" >> $GITHUB_OUTPUT
+          echo "changes_count=$(cat ./scripts/temp-changes-count.txt)" >> $GITHUB_OUTPUT
+
+      - name: Apply Changes
+        if: ${{ steps.collect_changes.outputs.changes_count > 0 }}
+        id: apply_changes
+        run: |
+          rush publish --apply
+          cd tools/ci
+          rushx ci:collect-versions
+          echo "release=$(cat ./scripts/temp-versions.json)" >> $GITHUB_OUTPUT
+
+      - name: Commit Changes
+        if: ${{ steps.collect_changes.outputs.changes_count > 0 }}
+        id: commit_changes
+        run: |
+          git config --global user.email "github-actions[bot]@users.noreply.github.com"
+          git config --global user.name "github-actions[bot]"
+          git add .
+          git commit --amend --no-edit
+          echo "commit_id=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Push changes
+        if: ${{ steps.collect_changes.outputs.changes_count > 0 }}
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          force_with_lease: true
+
+  release:
+    runs-on: ubuntu-latest
+    needs: collect_changes
+    if: ${{ needs.collect_changes.outputs.changes_count > 0 }}
+    strategy:
+      matrix:
+        release: ${{ fromJson(needs.collect_changes.outputs.release) }}
+    steps:
+      - name: Step ${{ matrix.release.packageName }} ${{ matrix.release.version }}
+        run: |
+          echo "Release package name: ${{ matrix.release.packageName }}"
+          echo "Release package version: ${{ matrix.release.version }}"
+
+      - name: Create Tag
+        id: create_tag
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: release/${{ matrix.release.packageName }}_v${{ matrix.release.version }}
+          release_name: Release ${{ matrix.release.packageName }} v${{ matrix.release.version }}
+          draft: false
+          prerelease: false
+          commitish: ${{ needs.collect_changes.outputs.commit_id }}

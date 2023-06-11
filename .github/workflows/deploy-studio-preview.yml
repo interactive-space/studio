@@ -1,0 +1,40 @@
+name: Deploy Studio Preview
+
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+
+on:
+  push:
+    branches:
+      - 'feat/studio_*'
+      - 'fix/studio_*'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.16.0'
+      - name: Install Rush.js
+        run: npm install -g @microsoft/rush
+      - name: Install dependencies
+        run: rush install --to app-entry
+      - name: Build
+        run: rush build --to app-entry
+      - name: Move Artifacts
+        run: mkdir -p ./.vercel/output/static && mv ./packages/app-entry/dist/* ./.vercel/output/static
+      - name: Clear
+        run: rm -rf ./.vercel/output/static/*.json
+      - name: Copy Entry Html
+        run: cp ./.vercel/output/static/html/main/index.html ./.vercel/output/static/index.html
+      - name: Copy Vercel Config JSON
+        run: cp ./packages/app-entry/vercel-config.json ./.vercel/output/config.json
+      - name: Install Vercel CLI
+        run: npm install --global vercel@latest
+      - name: Deploy Project Artifacts to Vercel
+        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} --build-env PREVIEW=true

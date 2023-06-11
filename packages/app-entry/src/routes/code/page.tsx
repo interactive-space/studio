@@ -1,5 +1,5 @@
 import { Helmet } from '@modern-js/runtime/head';
-import { Editor } from '@interactive/code-editor';
+import { Editor } from '@interactive-space/code-editor';
 
 const CodePage = () => (
   <>

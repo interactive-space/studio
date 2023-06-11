@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "strict": true
+  },
+  "include": [
+    "scripts/**/*.ts", // 包含 src 目录下的所有 .ts 文件
+  ]
+}
