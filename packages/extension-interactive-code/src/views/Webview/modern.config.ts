@@ -1,8 +1,11 @@
 import appTools, { defineConfig } from '@modern-js/app-tools';
 import { resolve } from 'path';
 
+const isDevelopment = process.env.NODE_ENV === 'development';
 const distRelativePath = 'resources/webview';
+
 const assetPrefix = `https://editor.incca.cn/extensions/interactive-code/1.0/${distRelativePath}`;
+const root = isDevelopment ? resolve(__dirname, '../../../', distRelativePath) : undefined;
 
 // https://modernjs.dev/en/configure/app/usage
 export default defineConfig<'rspack'>({
@@ -20,9 +23,7 @@ export default defineConfig<'rspack'>({
   },
   output: {
     assetPrefix,
-    distPath: {
-      root: resolve(__dirname, '../../../', distRelativePath),
-    },
+    distPath: { root },
   },
   plugins: [
     appTools({
