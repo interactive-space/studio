@@ -5,7 +5,7 @@
     "reset": "npx rimraf ./**/node_modules",
     "dev": "modern dev",
     "build": "modern build",
-    "start": "modern start",
+    "start": "modern dev",
     "serve": "modern serve",
     "new": "modern new",
     "lint": "modern lint",
@@ -51,6 +51,7 @@
     "@types/node": "~16.11.7",
     "@types/react": "~18.0.26",
     "@types/react-dom": "~18.0.10",
-    "@modern-js/builder-rspack-provider": "2.19.1"
+    "@modern-js/builder-rspack-provider": "2.19.1",
+    "@modern-js/plugin-proxy": "~2.23.1"
   }
 }

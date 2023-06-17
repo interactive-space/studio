@@ -7,6 +7,7 @@ export default defineConfig<'rspack'>({
   },
   dev: {
     port: 3000,
+    startUrl: 'https://dev.istudio.today',
   },
   plugins: [
     appTools({
