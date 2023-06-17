@@ -23,9 +23,9 @@ jobs:
       - name: Install Rush.js
         run: npm install -g @microsoft/rush
       - name: Install dependencies
-        run: rush install --to app-entry
+        run: rush install --to studio
       - name: Build
-        run: rush build --to app-entry
+        run: rush build --to studio
       - name: Move Artifacts
         run: mkdir -p ./.vercel/output/static && mv ./packages/app-entry/dist/* ./.vercel/output/static
       - name: Clear
