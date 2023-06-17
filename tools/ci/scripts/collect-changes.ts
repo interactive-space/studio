@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync, statSync, writeFileSync } from 'fs';
+import { readdirSync, readFileSync, statSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
 import { parse } from 'json5';
 import type { RushProject, RushRepoInfo } from './types';
@@ -10,6 +10,12 @@ const { projects } = parse<RushRepoInfo>(rushJSONStr);
 const changes: RushProject[] = [];
 
 function traverseDirectory(directoryPath: string) {
+  const isDirectory = existsSync(directoryPath) && statSync(directoryPath).isDirectory();
+
+  if (!isDirectory) {
+    return;
+  }
+
   const files = readdirSync(directoryPath);
 
   files.forEach((file: string) => {
