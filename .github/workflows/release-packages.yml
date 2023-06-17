@@ -3,7 +3,7 @@ name: Release Packages
 on:
   push:
     branches:
-      - 'chore/ci'
+      - 'main'
 
 jobs:
   collect_changes:
@@ -15,6 +15,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          token: ${{ secrets.CI_PAT }}
+          fetch-depth: 0
 
       - name: Install Node.js
         uses: actions/setup-node@v3
@@ -48,8 +51,8 @@ jobs:
         if: ${{ steps.collect_changes.outputs.changes_count > 0 }}
         id: commit_changes
         run: |
-          git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git config --global user.name "github-actions[bot]"
+          git config --global user.email "interactive-studio@outlook.com"
+          git config --global user.name "Interactive-Space-CI"
           git add .
           git commit --amend --no-edit
           echo "commit_id=$(git rev-parse HEAD)" >> $GITHUB_OUTPUT
@@ -58,7 +61,7 @@ jobs:
         if: ${{ steps.collect_changes.outputs.changes_count > 0 }}
         uses: ad-m/github-push-action@master
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ secrets.CI_PAT }}
           force_with_lease: true
 
   release:
@@ -69,16 +72,10 @@ jobs:
       matrix:
         release: ${{ fromJson(needs.collect_changes.outputs.release) }}
     steps:
-      - name: Step ${{ matrix.release.packageName }} ${{ matrix.release.version }}
-        run: |
-          echo "Release package name: ${{ matrix.release.packageName }}"
-          echo "Release package version: ${{ matrix.release.version }}"
-
-      - name: Create Tag
-        id: create_tag
+      - name: Release ${{ matrix.release.packageName }} ${{ matrix.release.version }}
         uses: actions/create-release@v1
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.CI_PAT }}
         with:
           tag_name: release/${{ matrix.release.packageName }}_v${{ matrix.release.version }}
           release_name: Release ${{ matrix.release.packageName }} v${{ matrix.release.version }}
