@@ -5,6 +5,9 @@ export default defineConfig<'rspack'>({
   runtime: {
     router: true,
   },
+  output: {
+    assetPrefix: 'https://studio.incca.cn',
+  },
   dev: {
     port: 3000,
     startUrl: 'https://dev.istudio.today',
