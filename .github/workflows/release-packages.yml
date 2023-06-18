@@ -43,7 +43,7 @@ jobs:
         if: ${{ steps.collect_changes.outputs.changes_count > 0 }}
         id: apply_changes
         run: |
-          rush publish --apply
+          rush publish --apply --add-commit-details
           cd tools/ci
           rushx ci:collect-versions
           echo "release=$(cat ./scripts/temp-versions.json)" >> $GITHUB_OUTPUT
