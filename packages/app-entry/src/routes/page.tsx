@@ -19,7 +19,7 @@ const Index = () => (
         style={{ width: '360px', margin: '50px 0 25px' }}
       />
       <label style={{ fontSize: '30px', fontWeight: 'bold' }}>
-        Interactive
+        Interactive Studio
       </label>
     </main>
   </>
