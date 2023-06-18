@@ -1,6 +1,6 @@
 {
   "name": "studio",
-  "version": "0.0.2",
+  "version": "0.0.1",
   "scripts": {
     "reset": "npx rimraf ./**/node_modules",
     "dev": "modern dev",

@@ -2,21 +2,9 @@
   "name": "studio",
   "entries": [
     {
-      "version": "0.0.2",
-      "tag": "studio_v0.0.2",
-      "date": "Sun, 18 Jun 2023 15:09:05 GMT",
-      "comments": {
-        "patch": [
-          {
-            "comment": "Storing Static Assets Using OSS"
-          }
-        ]
-      }
-    },
-    {
       "version": "0.0.1",
       "tag": "studio_v0.0.1",
-      "date": "Sat, 17 Jun 2023 15:34:19 GMT",
+      "date": "Sun, 18 Jun 2023 15:28:56 GMT",
       "comments": {}
     }
   ]
