@@ -4,7 +4,7 @@ import { Editor } from '@interactive-space/code-editor';
 const CodePage = () => (
   <>
     <Helmet>
-      <title>Interactive Code</title>
+      <title>Code</title>
     </Helmet>
     <main style={{ height: '100%' }}>
       <Editor

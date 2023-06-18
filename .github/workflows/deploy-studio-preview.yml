@@ -36,13 +36,28 @@ jobs:
           s config add --AccessKeyID ${{ secrets.ACCESSKEYID }} --AccessKeySecret ${{ secrets.ACCESSKEYSECRET }} -a default
           s studio-oss deploy -y
 
+      - name: Generate Domain
+        id: "get_domain_name"
+        run: |
+          # Get the branch name
+          branch_name=${GITHUB_REF##*/}
+          # Extract the variable value
+          var=${branch_name#studio_}
+          # Generate the domain name
+          domain="${var}.pre.istudio.today"
+          # Output the result
+          echo "Domain name: $domain"
+          echo "domain=$domain" >> $GITHUB_OUTPUT
+
       - name: Copy Files to Vercel Output
         run: |
           mkdir -p ./.vercel/output/static
           cp ./packages/app-entry/dist/html/main/index.html ./.vercel/output/static/index.html
           cp ./packages/app-entry/vercel-config.json ./.vercel/output/config.json
 
+
       - name: Deploy App to Vercel
         run: |
           npm install --global vercel@latest
-          vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} --build-env PREVIEW=true
+          vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} --build-env PREVIEW=true > deployment-url.txt
+          vercel alias set $(cat deployment-url.txt) ${{ steps.get_domain_name.outputs.domain }} --token=${{ secrets.VERCEL_TOKEN }}

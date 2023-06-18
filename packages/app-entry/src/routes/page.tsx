@@ -3,7 +3,7 @@ import { Helmet } from '@modern-js/runtime/head';
 const Index = () => (
   <>
     <Helmet>
-      <title>Interactive Stuido</title>
+      <title>Stuido</title>
     </Helmet>
     <main
       style={{
