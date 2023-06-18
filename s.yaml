@@ -1,0 +1,23 @@
+# ------------------------------------
+#   Yaml参考文档：https://www.serverless-devs.com/fc/yaml/readme
+# ------------------------------------
+edition: 1.0.0
+name: studio
+access: "default"
+
+vars:
+  region: "cn-shenzhen"
+
+services:
+  studio-oss:
+    component: oss
+    props:
+      bucket: auto
+      codeUri: ./packages/app-entry/dist
+      region: ${vars.region}
+      website:
+        index: index.html
+        error: 404.html
+        subDirType: index
+      customDomains:
+        - domainName: auto

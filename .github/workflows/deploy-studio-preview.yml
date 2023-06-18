@@ -26,15 +26,23 @@ jobs:
         run: rush install --to studio
       - name: Build
         run: rush build --to studio
-      - name: Move Artifacts
-        run: mkdir -p ./.vercel/output/static && mv ./packages/app-entry/dist/* ./.vercel/output/static
-      - name: Clear
-        run: rm -rf ./.vercel/output/static/*.json
-      - name: Copy Entry Html
-        run: cp ./.vercel/output/static/html/main/index.html ./.vercel/output/static/index.html
-      - name: Copy Vercel Config JSON
-        run: cp ./packages/app-entry/vercel-config.json ./.vercel/output/config.json
-      - name: Install Vercel CLI
-        run: npm install --global vercel@latest
-      - name: Deploy Project Artifacts to Vercel
-        run: vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} --build-env PREVIEW=true
+
+      - name: Clear Unused Files
+        run: rm -rf ./packages/app-entry/dist/*.json
+
+      - name: Deploy Static Files to OSS
+        run: |
+          npm install -g @serverless-devs/s
+          s config add --AccessKeyID ${{ secrets.ACCESSKEYID }} --AccessKeySecret ${{ secrets.ACCESSKEYSECRET }} -a default
+          s studio-oss deploy -y
+
+      - name: Copy Files to Vercel Output
+        run: |
+          mkdir -p ./.vercel/output/static
+          cp ./packages/app-entry/dist/html/main/index.html ./.vercel/output/static/index.html
+          cp ./packages/app-entry/vercel-config.json ./.vercel/output/config.json
+
+      - name: Deploy App to Vercel
+        run: |
+          npm install --global vercel@latest
+          vercel deploy --prebuilt --token=${{ secrets.VERCEL_TOKEN }} --build-env PREVIEW=true
