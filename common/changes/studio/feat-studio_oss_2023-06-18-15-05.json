@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "studio",
+      "comment": "Storing Static Assets Using OSS",
+      "type": "patch"
+    }
+  ],
+  "packageName": "studio"
+}
