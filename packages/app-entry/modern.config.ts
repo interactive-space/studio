@@ -1,16 +1,26 @@
 import appTools, { defineConfig } from '@modern-js/app-tools';
 
+const isPreview = process.env.APP_ENV === 'preview';
+const assetPrefix = isPreview
+  ? 'https://pre.studio.incca.cn'
+  : 'https://studio.incca.cn';
+
 // https://modernjs.dev/en/configure/app/usage
 export default defineConfig<'rspack'>({
+  source: {
+    globalVars: {
+      'process.env.APP_ENV': process.env.APP_ENV || 'development',
+    },
+  },
   runtime: {
     router: true,
   },
   output: {
-    assetPrefix: 'https://studio.incca.cn',
+    assetPrefix,
   },
   dev: {
     port: 3000,
-    startUrl: 'https://dev.istudio.today',
+    startUrl: 'http://localhost:3000/',
   },
   plugins: [
     appTools({

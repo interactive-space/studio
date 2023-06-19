@@ -33,7 +33,7 @@ export function getWorkbenchConfiguration({
   configurationDefaults,
   additionalBuiltinExtensions = [],
   workspace,
-}: Partial<IWorkbenchConfiguration>): IWorkbenchConfiguration {
+}: Partial<IWorkbenchConfiguration>, editorBaseUrl: string): IWorkbenchConfiguration {
   return {
     productConfiguration: {
       version: '1.78.2',
@@ -41,9 +41,8 @@ export function getWorkbenchConfiguration({
       applicationName: 'CodeEditor',
       nameShort: 'CodeEditor',
       nameLong: 'CodeEditor',
-      webEndpointUrlTemplate: 'https://editor.incca.cn/1.78.2',
-      webviewContentExternalBaseUrlTemplate:
-        'https://editor.incca.cn/1.78.2/external-template',
+      webEndpointUrlTemplate: `${editorBaseUrl}/1.78.2`,
+      webviewContentExternalBaseUrlTemplate: `${editorBaseUrl}/1.78.2/external-template`,
       ...productConfiguration,
     },
     configurationDefaults: {

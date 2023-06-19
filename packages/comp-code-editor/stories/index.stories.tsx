@@ -1,19 +1,24 @@
 import React from 'react';
-import { Editor } from '@interactive-space/code-space';
+import { Editor } from '@interactive-space/code-editor';
 
-export const ThemeDark = () => <Editor style={{ height: 600 }} />;
+const editorBaseUrl = 'https://editor.incca.cn';
+
+export const ThemeDark = () => (
+  <Editor editorBaseUrl={editorBaseUrl} style={{ height: 600 }} />
+);
 
 export const ThemeLight = () => (
-  <Editor theme="light" style={{ height: 600 }} />
+  <Editor editorBaseUrl={editorBaseUrl} theme="light" style={{ height: 600 }} />
 );
 
 export const InteractiveCode = () => (
   <Editor
+    editorBaseUrl={editorBaseUrl}
     style={{ height: 600 }}
     extensions={[
       {
         name: 'interactive-studio.extension-interactive-code',
-        url: 'https://editor.incca.cn/extensions/interactive-code/1.0/',
+        url: `${editorBaseUrl}/extensions/interactive-code/1.0/`,
       },
     ]}
   />
