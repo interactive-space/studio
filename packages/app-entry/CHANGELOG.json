@@ -2,6 +2,20 @@
   "name": "studio",
   "entries": [
     {
+      "version": "0.1.0",
+      "tag": "studio_v0.1.0",
+      "date": "Mon, 19 Jun 2023 16:25:36 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Preview environment accessing static resources via preview domain.",
+            "author": "incca <591980606@qq.com>",
+            "commit": "7fd1b607effaa670e0fdb2055307c2ad0624df38"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.0.1",
       "tag": "studio_v0.0.1",
       "date": "Sun, 18 Jun 2023 15:48:11 GMT",
