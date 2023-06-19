@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "studio",
+      "comment": "Preview environment accessing static resources via preview domain.",
+      "type": "minor"
+    }
+  ],
+  "packageName": "studio"
+}
