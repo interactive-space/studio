@@ -13,6 +13,7 @@ import iframeContent from './editor.html';
 export type { IEditorProps };
 
 export function Editor({
+  editorBaseUrl,
   theme = 'dark',
   workspace,
   className,
@@ -30,10 +31,10 @@ export function Editor({
       return;
     }
     editor.document.open();
-    const content = iframeContent.replace(
-      '{{receiverId}}',
-      messenger.receiverId,
-    );
+    const content = iframeContent
+      .replace('{{receiverId}}', messenger.receiverId)
+      .replace(/{{editorBaseUrl}}/g, editorBaseUrl);
+    console.log(content);
     editor.document.write(content);
     editor.document.close();
 
@@ -51,7 +52,7 @@ export function Editor({
         productConfiguration: {
           extensionEnabledApiProposals: apiProposals,
         },
-      }),
+      }, editorBaseUrl),
     );
   };
 
