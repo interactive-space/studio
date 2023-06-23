@@ -23,7 +23,7 @@ export default function Layout() {
         <link
           rel="icon"
           type="image/x-icon"
-          href={`${process.env.ASSET_PREFIX}/public/images/logo-small.png`}
+          href={`${process.env.ASSET_PREFIX}/public/logo-small.png`}
         />
       </Helmet>
       <CssBaseline />
@@ -39,7 +39,7 @@ export default function Layout() {
       >
         <div style={{ display: 'flex', alignItems: 'center' }}>
           <img
-            src={`${process.env.ASSET_PREFIX}/public/images/logo.png`}
+            src={`${process.env.ASSET_PREFIX}/public/logo-small.png`}
             alt="logo"
             style={{ height: '28px', margin: '0 12px' }}
           />

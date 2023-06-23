@@ -14,7 +14,7 @@ const Index = () => (
       }}
     >
       <img
-        src={`${process.env.ASSET_PREFIX}/public/images/logo.png`}
+        src={`${process.env.ASSET_PREFIX}/public/logo.png`}
         alt="logo"
         style={{ width: '360px', margin: '50px 0 25px' }}
       />

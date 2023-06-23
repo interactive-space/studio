@@ -2,6 +2,20 @@
   "name": "studio",
   "entries": [
     {
+      "version": "0.1.1",
+      "tag": "studio_v0.1.1",
+      "date": "Fri, 23 Jun 2023 09:22:56 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "New Logo",
+            "author": "incca <591980606@qq.com>",
+            "commit": "a664f81121146f0a14faff213e03114bfcbe8188"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.0",
       "tag": "studio_v0.1.0",
       "date": "Mon, 19 Jun 2023 16:25:36 GMT",
