@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "studio",
+      "comment": "New Logo",
+      "type": "patch"
+    }
+  ],
+  "packageName": "studio"
+}
