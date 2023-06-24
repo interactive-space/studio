@@ -14,12 +14,7 @@ const CodePage: FC = () => {
 
   const extensions = useMemo<IExtension[]>(() => {
     if (Array.isArray(data?.data)) {
-      return data.data.map(
-        (item: Omit<IExtension, 'url'> & { path: string }) => ({
-          ...item,
-          url: `${editorBaseUrl}${item.path}`,
-        }),
-      );
+      return data.data;
     }
     return [];
   }, [data]);

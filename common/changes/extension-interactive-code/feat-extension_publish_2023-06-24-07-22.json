@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "extension-interactive-code",
+      "comment": "Initial release",
+      "type": "patch"
+    }
+  ],
+  "packageName": "extension-interactive-code"
+}

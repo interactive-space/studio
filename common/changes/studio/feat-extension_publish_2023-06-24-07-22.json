@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "studio",
+      "comment": "Support remote extension",
+      "type": "minor"
+    }
+  ],
+  "packageName": "studio"
+}

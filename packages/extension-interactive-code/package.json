@@ -3,7 +3,7 @@
   "publisher": "interactive-studio",
   "displayName": "Interactive Code",
   "description": "Extension for Interactive Code",
-  "version": "0.0.1",
+  "version": "0.0.0",
   "enabledApiProposals": ["fileSearchProvider", "textSearchProvider"],
   "engines": {
     "vscode": "^1.78.0"
