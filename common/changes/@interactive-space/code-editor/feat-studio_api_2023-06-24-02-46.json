@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "@interactive-space/code-editor",
+      "comment": "",
+      "type": "none"
+    }
+  ],
+  "packageName": "@interactive-space/code-editor"
+}

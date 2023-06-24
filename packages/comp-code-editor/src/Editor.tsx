@@ -10,8 +10,6 @@ import {
 } from './base/workbench';
 import iframeContent from './editor.html';
 
-export type { IEditorProps };
-
 export function Editor({
   editorBaseUrl,
   theme = 'dark',
@@ -34,7 +32,6 @@ export function Editor({
     const content = iframeContent
       .replace('{{receiverId}}', messenger.receiverId)
       .replace(/{{editorBaseUrl}}/g, editorBaseUrl);
-    console.log(content);
     editor.document.write(content);
     editor.document.close();
 

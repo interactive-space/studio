@@ -1,0 +1,10 @@
+{
+  "changes": [
+    {
+      "packageName": "studio",
+      "comment": "Dynamically fetching the list of editor extensions.",
+      "type": "patch"
+    }
+  ],
+  "packageName": "studio"
+}

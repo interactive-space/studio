@@ -10,6 +10,8 @@ export default defineConfig<'rspack'>({
   source: {
     globalVars: {
       'process.env.APP_ENV': process.env.APP_ENV || 'development',
+      'process.env.API_BASEURL':
+        'https://studio-configuration.pre.api.istudio.today',
     },
   },
   runtime: {
