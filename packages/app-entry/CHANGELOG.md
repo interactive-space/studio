@@ -1,6 +1,13 @@
 # Change Log - studio
 
-This log was last generated on Fri, 23 Jun 2023 09:22:56 GMT and should not be manually modified.
+This log was last generated on Sat, 24 Jun 2023 03:19:24 GMT and should not be manually modified.
+
+## 0.1.2
+Sat, 24 Jun 2023 03:19:24 GMT
+
+### Patches
+
+- Dynamically fetching the list of editor extensions.
 
 ## 0.1.1
 Fri, 23 Jun 2023 09:22:56 GMT

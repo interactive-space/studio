@@ -2,6 +2,20 @@
   "name": "studio",
   "entries": [
     {
+      "version": "0.1.2",
+      "tag": "studio_v0.1.2",
+      "date": "Sat, 24 Jun 2023 03:19:24 GMT",
+      "comments": {
+        "patch": [
+          {
+            "comment": "Dynamically fetching the list of editor extensions.",
+            "author": "incca <591980606@qq.com>",
+            "commit": "1389d4436e3865484bd406be76993893dcd32506"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.1",
       "tag": "studio_v0.1.1",
       "date": "Fri, 23 Jun 2023 09:22:56 GMT",
