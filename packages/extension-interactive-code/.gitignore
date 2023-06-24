@@ -3,3 +3,4 @@
 resources/webview/
 dist/
 node_modules/
+output/

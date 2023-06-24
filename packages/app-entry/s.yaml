@@ -13,7 +13,7 @@ services:
     component: oss
     props:
       bucket: auto
-      codeUri: ./packages/app-entry/dist
+      codeUri: ./dist
       region: ${vars.region}
       website:
         index: index.html

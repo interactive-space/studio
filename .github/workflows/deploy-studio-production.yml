@@ -31,6 +31,7 @@ jobs:
 
       - name: Deploy Static Files to OSS
         run: |
+          cd packages/app-entry
           npm install -g @serverless-devs/s
           s config add --AccessKeyID ${{ secrets.ACCESSKEYID }} --AccessKeySecret ${{ secrets.ACCESSKEYSECRET }} -a default
           s studio-oss deploy -y

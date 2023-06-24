@@ -1,0 +1,31 @@
+# ------------------------------------
+#   Yaml参考文档：https://www.serverless-devs.com/fc/yaml/readme
+# ------------------------------------
+edition: 1.0.0 #  命令行YAML规范版本，遵循语义化版本（Semantic Versioning）规范
+name: extension #  项目名称
+access: "default"
+
+vars: # 全局变量
+  region: "cn-shenzhen"
+
+services:
+  extension-oss:
+    component: oss
+    actions:
+      pre-deploy:
+        - run: mkdir ./output/
+        - run: cp ./package.json ./output/package.json
+        - run: cp ./package.nls.json ./output/package.nls.json
+        - run: mv ./dist ./output/
+        - run: mv ./resources ./output/
+    props:
+      bucket: auto
+      codeUri: ./output
+      region: ${vars.region}
+      subDir: interactive-code/${env(EXT_VER)}
+      website:
+        index: index.html
+        error: 404.html
+        subDirType: index
+      customDomains:
+        - domainName: auto
