@@ -1,7 +1,9 @@
 import { Helmet } from '@modern-js/runtime/head';
 import { Outlet, useNavigate } from '@modern-js/runtime/router';
+import { CssBaseline } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { AppBar, Box, Button, CssBaseline } from '@mui/material';
+import { SWRConfig } from 'swr';
+import { AppHeader } from '@/components/AppHeader';
 import './index.css';
 
 const darkTheme = createTheme({
@@ -19,45 +21,28 @@ export default function Layout() {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <Helmet>
-        <link
-          rel="icon"
-          type="image/x-icon"
-          href={`${process.env.ASSET_PREFIX}/public/logo-small.png`}
-        />
-      </Helmet>
-      <CssBaseline />
-      <AppBar
-        position="static"
-        sx={{
-          cursor: 'default',
-          height: '48px',
-          display: 'flex',
-          flexDirection: 'row',
-          alignItems: 'center',
+      <SWRConfig
+        value={{
+          fetcher: (url: string) =>
+            fetch(`${process.env.API_BASEURL}${url}`, {
+              credentials: 'include',
+              mode: 'cors',
+            }).then(res => res.json()),
         }}
       >
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <img
-            src={`${process.env.ASSET_PREFIX}/public/logo-small.png`}
-            alt="logo"
-            style={{ height: '28px', margin: '0 12px' }}
+        <Helmet>
+          <link
+            rel="icon"
+            type="image/x-icon"
+            href={`${process.env.ASSET_PREFIX}/public/logo-small.png`}
           />
-          <span
-            onClick={() => navigateTo('/')}
-            className="logo"
-            style={{ cursor: 'pointer', fontWeight: 'bold', fontSize: '18px' }}
-          >
-            Interactive
-          </span>
-          <Box sx={{ ml: '16px' }}>
-            <Button onClick={() => navigateTo('/code')}>Code</Button>
-          </Box>
+        </Helmet>
+        <CssBaseline />
+        <AppHeader navigateTo={navigateTo} />
+        <div style={{ flex: 1, overflow: 'auto' }}>
+          <Outlet />
         </div>
-      </AppBar>
-      <div style={{ flex: 1, overflow: 'auto' }}>
-        <Outlet />
-      </div>
+      </SWRConfig>
     </ThemeProvider>
   );
 }

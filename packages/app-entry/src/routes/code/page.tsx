@@ -1,5 +1,7 @@
+import { FC, useMemo } from 'react';
 import { Helmet } from '@modern-js/runtime/head';
-import { Editor } from '@interactive-space/code-editor';
+import { Editor, IExtension } from '@interactive-space/code-editor';
+import useSWRImmutable from 'swr/immutable';
 import { isDevelopment, isPreview } from '@/utils/env';
 
 const editorBaseUrl =
@@ -7,34 +9,48 @@ const editorBaseUrl =
     ? 'https://pre.editor.incca.cn'
     : 'https://editor.incca.cn';
 
-const CodePage = () => (
-  <>
-    <Helmet>
-      <title>Code</title>
-    </Helmet>
-    <main style={{ height: '100%' }}>
-      <Editor
-        editorBaseUrl={editorBaseUrl}
-        style={{ height: '100%' }}
-        bordered={false}
-        extensions={[
-          {
-            name: 'interactive-studio.extension-interactive-code',
-            url: `${editorBaseUrl}/extensions/interactive-code/1.0/`,
-            usedProposedAPI: ['fileSearchProvider', 'textSearchProvider'],
-          },
-        ]}
-        workspace={{
-          scheme: 'memfs',
-          authority: '',
-          path: '/koa',
-          query: new URLSearchParams({
-            zip: 'https://editor.incca.cn/koa.zip',
-          }).toString(),
-        }}
-      />
-    </main>
-  </>
-);
+const CodePage: FC = () => {
+  const { data } = useSWRImmutable('/configuration/editor-extensions');
+
+  const extensions = useMemo<IExtension[]>(() => {
+    if (Array.isArray(data?.data)) {
+      return data.data.map(
+        (item: Omit<IExtension, 'url'> & { path: string }) => ({
+          ...item,
+          url: `${editorBaseUrl}${item.path}`,
+        }),
+      );
+    }
+    return [];
+  }, [data]);
+
+  if (extensions.length === 0) {
+    return null;
+  }
+
+  return (
+    <>
+      <Helmet>
+        <title>Code</title>
+      </Helmet>
+      <main style={{ height: '100%' }}>
+        <Editor
+          editorBaseUrl={editorBaseUrl}
+          style={{ height: '100%' }}
+          bordered={false}
+          extensions={extensions}
+          workspace={{
+            scheme: 'memfs',
+            authority: '',
+            path: '/koa',
+            query: new URLSearchParams({
+              zip: 'https://editor.incca.cn/koa.zip',
+            }).toString(),
+          }}
+        />
+      </main>
+    </>
+  );
+};
 
 export default CodePage;
