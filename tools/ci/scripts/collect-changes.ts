@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync, statSync, writeFileSync, existsSync } from 'fs';
 import { join } from 'path';
 import { parse } from 'json5';
-import type { RushProject, RushRepoInfo } from './types';
+import type { RushProject, RushRepoInfo, ChangeDetail } from './types';
 
 const repoRootPath = join(__dirname, '../../../');
 
@@ -24,9 +24,11 @@ function traverseDirectory(directoryPath: string) {
     if (stats.isDirectory()) {
       traverseDirectory(filePath);
     } else if (filePath.endsWith('.json')) {
-      const { packageName } = require(filePath);
+      const { packageName, changes: packageChanges = [] } = require(filePath) as ChangeDetail;
       const packageInfo = projects.find(project => project.packageName === packageName);
-      if (packageInfo) {
+      const isChanged = packageChanges.some(item => item.type !== 'none');
+
+      if (packageInfo && isChanged) {
         changes.push(packageInfo);
       }
     }
