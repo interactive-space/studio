@@ -2,9 +2,10 @@ import appTools, { defineConfig } from '@modern-js/app-tools';
 import { resolve } from 'path';
 
 const isDevelopment = process.env.NODE_ENV === 'development';
-const distRelativePath = 'resources/webview';
+const extVersion = process.env.EXT_VER || 'default';
 
-const assetPrefix = `https://editor.incca.cn/extensions/interactive-code/1.0/${distRelativePath}`;
+const distRelativePath = 'resources/webview';
+const assetPrefix = `https://extension.editor.incca.cn/interactive-code/${extVersion}/${distRelativePath}`;
 const root = isDevelopment ? resolve(__dirname, '../../../', distRelativePath) : undefined;
 
 // https://modernjs.dev/en/configure/app/usage
@@ -31,12 +32,10 @@ export default defineConfig<'rspack'>({
     }),
   ],
   tools: {
-    rspack: {
-      devServer: {
-        devMiddleware: {
-          writeToDisk: true,
-        }
+    devServer: {
+      devMiddleware: {
+        writeToDisk: true,
       }
-    },
+    }
   }
 });

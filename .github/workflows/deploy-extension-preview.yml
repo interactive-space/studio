@@ -1,0 +1,37 @@
+name: Deploy Extension Preview
+
+on:
+  push:
+    branches:
+      - 'feat/*'
+      - 'fix/*'
+    paths:
+      - 'packages/extension-interactive-code/**'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      - name: Install Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.16.0'
+      - name: Install Rush.js
+        run: npm install -g @microsoft/rush
+
+      - name: Get Extension Version
+        run: echo "EXT_VER=${GITHUB_SHA:0:7}" >> $GITHUB_ENV
+
+      - name: Install dependencies
+        run: rush install --to extension-interactive-code
+      - name: Build
+        run: rush build --to extension-interactive-code
+
+      - name: Deploy Static Files to OSS
+        run: |
+          cd packages/extension-interactive-code
+          npm install -g @serverless-devs/s
+          s config add --AccessKeyID ${{ secrets.ACCESSKEYID }} --AccessKeySecret ${{ secrets.ACCESSKEYSECRET }} -a default
+          s extension-oss deploy -y

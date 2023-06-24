@@ -344,7 +344,8 @@
     },
     {
       "packageName": "extension-interactive-code",
-      "projectFolder": "packages/extension-interactive-code"
+      "projectFolder": "packages/extension-interactive-code",
+      "shouldPublish": true
     },
     {
       "packageName": "ci",
