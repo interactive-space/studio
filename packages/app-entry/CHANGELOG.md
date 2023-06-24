@@ -1,6 +1,13 @@
 # Change Log - studio
 
-This log was last generated on Sat, 24 Jun 2023 03:19:24 GMT and should not be manually modified.
+This log was last generated on Sat, 24 Jun 2023 07:30:06 GMT and should not be manually modified.
+
+## 0.2.0
+Sat, 24 Jun 2023 07:30:06 GMT
+
+### Minor changes
+
+- Support remote extension
 
 ## 0.1.2
 Sat, 24 Jun 2023 03:19:24 GMT

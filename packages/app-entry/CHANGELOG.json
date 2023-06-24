@@ -2,6 +2,20 @@
   "name": "studio",
   "entries": [
     {
+      "version": "0.2.0",
+      "tag": "studio_v0.2.0",
+      "date": "Sat, 24 Jun 2023 07:30:06 GMT",
+      "comments": {
+        "minor": [
+          {
+            "comment": "Support remote extension",
+            "author": "incca <591980606@qq.com>",
+            "commit": "43be49a67a3b18b6bb1286bf29d5910755d69691"
+          }
+        ]
+      }
+    },
+    {
       "version": "0.1.2",
       "tag": "studio_v0.1.2",
       "date": "Sat, 24 Jun 2023 03:19:24 GMT",
