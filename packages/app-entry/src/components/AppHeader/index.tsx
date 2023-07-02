@@ -34,7 +34,7 @@ export const AppHeader: FC<IHeaderProps> = ({ navigateTo }) => (
         Interactive
       </span>
       <Box sx={{ ml: '16px' }}>
-        <Button onClick={() => navigateTo('/code')}>Code</Button>
+        <Button onClick={() => navigateTo('/code')}>Code1</Button>
       </Box>
     </div>
   </AppBar>
